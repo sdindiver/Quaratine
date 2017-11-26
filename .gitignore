@@ -1,0 +1,9 @@
+.DS_Store
+/.bin/
+/target/
+/build
+/bundles/*/bin
+/ssl/*.key
+/ssl/*.pem
+/ssl/log.txt
+/.settings
