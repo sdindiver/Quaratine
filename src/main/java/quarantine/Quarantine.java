@@ -13,6 +13,7 @@ public class Quarantine {
 
 	public Quarantine(LinkedHashMap<PatientType, Integer> patientCount) {
 		System.out.println("A");
+		System.out.println("B");
 		this.patientInfoMap =patientCount;
 	}
 
