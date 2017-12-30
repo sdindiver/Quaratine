@@ -12,7 +12,7 @@ public class Quarantine {
 	boolean isInsulineInjected = false;
 
 	public Quarantine(LinkedHashMap<PatientType, Integer> patientCount) {
-		System.out.println("hard reset demo");
+		System.out.println("indiver demo");
 		this.patientInfoMap =patientCount;
 	}
 
