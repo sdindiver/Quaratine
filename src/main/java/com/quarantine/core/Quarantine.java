@@ -29,11 +29,11 @@ public class Quarantine {
 		for (Patient patient : this.patientList) {
 			patientSummaryMap.merge(patient.getHealthStatus(), 1, Integer::sum);
 		}
-		patientSummaryMap.put(HealthStatus.FEVER, 0);
-		patientSummaryMap.put(HealthStatus.DEAD, 0);
-		patientSummaryMap.put(HealthStatus.TUBERCLOSIS, 0);
-		patientSummaryMap.put(HealthStatus.HEALTHY, 0);
-		patientSummaryMap.put(HealthStatus.DIABATIC, 0);
+		patientSummaryMap.putIfAbsent(HealthStatus.FEVER, 0);
+		patientSummaryMap.putIfAbsent(HealthStatus.DEAD, 0);
+		patientSummaryMap.putIfAbsent(HealthStatus.TUBERCLOSIS, 0);
+		patientSummaryMap.putIfAbsent(HealthStatus.HEALTHY, 0);
+		patientSummaryMap.putIfAbsent(HealthStatus.DIABATIC, 0);
 		return patientSummaryMap;
 	}
 
