@@ -1,21 +1,54 @@
 package com.quarantine.core;
 
-abstract class AbstractTreatment {
-	 private final Medicine medicineName;
+import com.quarantine.core.Medicine;
+import com.quarantine.core.Quarantine;
+
+public class AbstractTreatment {
+	private AbstractTreatment nextHandler = null;
+
+	private final Medicine medicineName;
 
 	public AbstractTreatment(final Medicine medicineName) {
 		this.medicineName = medicineName;
 	}
-	
-	public Medicine getMedicineName(){
-		return medicineName;
+
+	public AbstractTreatment() {
+		medicineName = null;
 	}
 
-	public void treat(final Patient patient){
-		if(patient.getAppllyingTreatementQueue().contains(medicineName)){
-			accept(patient);
-		}
+	AbstractTreatment getNextHandler() {
+		return this.nextHandler;
+	}
+
+	protected Medicine getMedicineName() {
+		return medicineName;
 	}
 	
-	public abstract void accept(final Patient patient);
+	void treat(final Quarantine quarantine){
+		treat(quarantine,null);
+	}
+
+	void treat(final Quarantine quarantine, AbstractTreatment callBack) {
+
+		accept(quarantine);
+		if (this.nextHandler != null) {
+			this.nextHandler.treat(quarantine, callBack);
+		} else {
+			if(callBack !=null)
+				callBack.treat(quarantine);
+		}
+	}
+
+	void setNextHandler(AbstractTreatment handler) {
+		AbstractTreatment processHandler = this;
+		while (processHandler.nextHandler != null) {
+			processHandler = processHandler.nextHandler;
+		}
+		processHandler.nextHandler = handler;
+	}
+
+	public  void accept(Quarantine quarantine){
+		
+	};
+
 }

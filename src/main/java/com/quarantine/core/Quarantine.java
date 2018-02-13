@@ -1,80 +1,66 @@
 package com.quarantine.core;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import com.quarantine.core.treatmentImpl.TreatmentAntibiotic;
+import com.quarantine.core.treatmentImpl.TreatmentAspirin;
+import com.quarantine.core.treatmentImpl.TreatmentInsulin;
+import com.quarantine.core.treatmentImpl.TreatmentParacetamol;
 
 public class Quarantine {
 
-	private List<Patient> patientList;
+	private final PatientGroupMap patientGroupMap;
+	private final AbstractTreatment treatmentHandler;
 
-	private Quarantine(List<Patient> patientList) {
-		this.patientList = patientList;
+	private Quarantine(PatientGroupMap patientGroupMap) {
+		this.patientGroupMap = patientGroupMap;
+		this.treatmentHandler=new AbstractTreatment();
+	}
+	
+	
+	public boolean checkIfhasTreatment(Medicine medicine){
+		boolean allowed = false;
+		AbstractTreatment handler = this.treatmentHandler;
+		while(handler!=null){
+			allowed= medicine.equals(handler.getMedicineName());
+			handler=handler.getNextHandler();
+		}
+		return allowed;
+	}
+	
+	
+	 public PatientGroupMap getPatientGroups(){
+		return patientGroupMap;
 	}
 
-	public static Quarantine createFromCodeString(String codeString) {
+	public static Quarantine createFromCodeString(final String codeString) {
 		return new Quarantine(HealthStatus.createPatientList(codeString));
 	}
 
 	public String report() {
-		Map<HealthStatus, Integer> patientSummaryMap = getReportMap();
-
 		final String[] result = { "" };
-		patientSummaryMap.forEach((k, v) -> result[0] += HealthStatus.getCode(k) + ":" + v.toString() + " ");
+		this.patientGroupMap.forEach((k, v) -> result[0] += HealthStatus.getCode(k) + ":" + v.get() + " ");
 		return result[0].trim();
 	}
 
-	private Map<HealthStatus, Integer> getReportMap() {
-		Map<HealthStatus, Integer> patientSummaryMap = new TreeMap<>();
-		for (Patient patient : this.patientList) {
-			patientSummaryMap.merge(patient.getHealthStatus(), 1, Integer::sum);
-		}
-		patientSummaryMap.putIfAbsent(HealthStatus.FEVER, 0);
-		patientSummaryMap.putIfAbsent(HealthStatus.DEAD, 0);
-		patientSummaryMap.putIfAbsent(HealthStatus.TUBERCLOSIS, 0);
-		patientSummaryMap.putIfAbsent(HealthStatus.HEALTHY, 0);
-		patientSummaryMap.putIfAbsent(HealthStatus.DIABATIC, 0);
-		return patientSummaryMap;
-	}
-
+	
 	public void wait40Days() {
-		for (Patient patient : patientList) {
-			List<AbstractTreatment> patientTreatmentList = TreatmentRepository.getTreatments(patient);
-			for (AbstractTreatment treatment : patientTreatmentList) {
-				treatment.treat(patient);
-			}
-			if (patient.getHealthStatus().equals(HealthStatus.DIABATIC)) {
-				if (!patient.isInsulineInjected()) {
-					patient.changeHealthStatus(HealthStatus.DEAD);
-				}
-			}
-		}
+		treatmentHandler.treat(this,new DefaultTreatment());
 	}
 
 	public void aspirin() {
-		for (Patient patient : patientList) {
-			patient.addAppllyingTreatementQueue(Medicine.ASPIRIN);
-		}
-
+		treatmentHandler.setNextHandler(new TreatmentAspirin(Medicine.ASPIRIN));
 	}
 
 	public void antibiotic() {
-		for (Patient patient : patientList) {
-			patient.addAppllyingTreatementQueue(Medicine.ANTIBIOTIC);
-		}
+		treatmentHandler.setNextHandler(new TreatmentAntibiotic(Medicine.ANTIBIOTIC));
+		
 	}
 
 	public void insulin() {
-		for (Patient patient : patientList) {
-			patient.addAppllyingTreatementQueue(Medicine.INSULIN);
-		}
+		treatmentHandler.setNextHandler(new TreatmentInsulin(Medicine.INSULIN));
 	}
 
 	public void paracetamol() {
-		for (Patient patient : patientList) {
-			patient.addAppllyingTreatementQueue(Medicine.PARACETOL);
-		}
-
+		treatmentHandler.setNextHandler(new TreatmentParacetamol(Medicine.PARACETOL));
 	}
 
 }

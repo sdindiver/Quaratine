@@ -1,6 +1,6 @@
 package com.quarantine.core;
 
-enum Medicine {
+public enum Medicine {
 	INSULIN,
 	ANTIBIOTIC,
 	PARACETOL,
