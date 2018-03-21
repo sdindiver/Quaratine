@@ -29,7 +29,6 @@ public class AbstractTreatment {
 	}
 
 	void treat(final Quarantine quarantine, AbstractTreatment callBack) {
-
 		accept(quarantine);
 		if (this.nextHandler != null) {
 			this.nextHandler.treat(quarantine, callBack);

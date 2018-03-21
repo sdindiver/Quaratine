@@ -99,5 +99,14 @@ public class QuarantineTest {
         // paracetamol kills subject if mixed with aspirin
         assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
     }
+    //extra testcase
+//    @Test
+//    public void antibioticAndParacetamol() throws Exception {
+//        quarantine.paracetamol();
+//        quarantine.antibiotic();
+//        quarantine.wait40Days();
+//        // if paracetamol is mixed with antibiotic, healthy people catch tuberclosis
+//        assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
+//    }
 
 }
