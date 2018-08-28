@@ -14,6 +14,7 @@ public class Patients {
 	}
 	
 	public Patients(int counter){
+		System.out.println("master1");
 		this.counter=counter;
 	}
 	
