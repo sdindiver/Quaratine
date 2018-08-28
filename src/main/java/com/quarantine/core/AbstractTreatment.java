@@ -10,14 +10,14 @@ public class AbstractTreatment {
 	
 	
 	
-	private final Medicine medicineName;
+	private final Medicine medicine;
 
 	public AbstractTreatment(final Medicine medicineName) {
-		this.medicineName = medicineName;
+		this.medicine = medicineName;
 	}
 
 	public AbstractTreatment() {
-		medicineName = null;
+		medicine = null;
 	}
 
 	AbstractTreatment getNextHandler() {
@@ -25,7 +25,7 @@ public class AbstractTreatment {
 	}
 
 	protected Medicine getMedicineName() {
-		return medicineName;
+		return medicine;
 	}
 	
 	void treat(final Quarantine quarantine){
