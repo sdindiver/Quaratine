@@ -11,6 +11,7 @@ public enum HealthStatus {
 
 	HealthStatus(String healthStatus) {
 		System.out.println("master2");
+		System.out.println("master5");
 		System.out.println("master3");
 		System.out.println("master4");
 		this.healthStatus = healthStatus;
