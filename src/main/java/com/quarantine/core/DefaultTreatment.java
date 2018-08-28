@@ -13,6 +13,7 @@ public class DefaultTreatment extends AbstractTreatment {
 		
 		if(!quarantine.checkIfhasTreatment(Medicine.INSULIN)){
 			System.out.println("testRebase");
+			System.out.println("testRebase2");
 			quarantine.getPatientGroups().get(HealthStatus.DEAD).combine(quarantine.getPatientGroups().get(HealthStatus.DIABATIC));
 		}
 		
