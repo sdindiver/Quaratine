@@ -10,6 +10,7 @@ public enum HealthStatus {
 	private final String healthStatus;
 
 	HealthStatus(String healthStatus) {
+		System.out.println("master1");
 		this.healthStatus = healthStatus;
 	}
 
