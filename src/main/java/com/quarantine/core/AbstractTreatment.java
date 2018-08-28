@@ -6,6 +6,10 @@ import com.quarantine.core.Quarantine;
 public class AbstractTreatment {
 	private AbstractTreatment nextHandler = null;
 
+	
+	
+	
+	
 	private final Medicine medicineName;
 
 	public AbstractTreatment(final Medicine medicineName) {
