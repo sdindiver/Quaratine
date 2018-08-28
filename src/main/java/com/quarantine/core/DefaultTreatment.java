@@ -16,6 +16,7 @@ public class DefaultTreatment extends AbstractTreatment {
 			System.out.println("testRebase2");
 			System.out.println("testRebase3");
 			System.out.println("testRebase4");
+			System.out.println("testRebase5");
 			quarantine.getPatientGroups().get(HealthStatus.DEAD).combine(quarantine.getPatientGroups().get(HealthStatus.DIABATIC));
 		}
 		
