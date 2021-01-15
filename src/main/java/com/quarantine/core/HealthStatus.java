@@ -7,14 +7,10 @@ import java.util.NoSuchElementException;
 //F:0 H:3 D:0 T:1 X:3
 public enum HealthStatus {
 	FEVER("F"), HEALTHY("H"), DIABATIC("D"), TUBERCLOSIS("T"), DEAD("X");
+
 	private final String healthStatus;
 
 	HealthStatus(String healthStatus) {
-		System.out.println("master2");
-		System.out.println("master5");
-		System.out.println("master3");
-		System.out.println("master4");
-		System.out.println("master6");
 		this.healthStatus = healthStatus;
 	}
 
@@ -49,6 +45,5 @@ public enum HealthStatus {
 
 		return map;
 	}
-
 
 }

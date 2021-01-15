@@ -1,15 +1,8 @@
 package com.quarantine.core;
 
-import com.quarantine.core.Medicine;
-import com.quarantine.core.Quarantine;
-
 public class AbstractTreatment {
 	private AbstractTreatment nextHandler = null;
 
-	
-	
-	
-	
 	private final Medicine medicine;
 
 	public AbstractTreatment(final Medicine medicineName) {
@@ -27,9 +20,9 @@ public class AbstractTreatment {
 	protected Medicine getMedicineName() {
 		return medicine;
 	}
-	
-	void treat(final Quarantine quarantine){
-		treat(quarantine,null);
+
+	void treat(final Quarantine quarantine) {
+		treat(quarantine, null);
 	}
 
 	void treat(final Quarantine quarantine, AbstractTreatment callBack) {
@@ -37,7 +30,7 @@ public class AbstractTreatment {
 		if (this.nextHandler != null) {
 			this.nextHandler.treat(quarantine, callBack);
 		} else {
-			if(callBack !=null)
+			if (callBack != null)
 				callBack.treat(quarantine);
 		}
 	}
@@ -50,8 +43,8 @@ public class AbstractTreatment {
 		processHandler.nextHandler = handler;
 	}
 
-	public  void accept(Quarantine quarantine){
-		
+	public void accept(Quarantine quarantine) {
+
 	};
 
 }

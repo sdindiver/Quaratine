@@ -12,22 +12,20 @@ public class Quarantine {
 
 	private Quarantine(PatientGroupMap patientGroupMap) {
 		this.patientGroupMap = patientGroupMap;
-		this.treatmentHandler=new AbstractTreatment();
+		this.treatmentHandler = new AbstractTreatment();
 	}
-	
-	
-	public boolean checkIfhasTreatment(Medicine medicine){
+
+	public boolean checkIfhasTreatment(Medicine medicine) {
 		boolean allowed = false;
 		AbstractTreatment handler = this.treatmentHandler;
-		while(handler!=null){
-			allowed= medicine.equals(handler.getMedicineName());
-			handler=handler.getNextHandler();
+		while (handler != null) {
+			allowed = medicine.equals(handler.getMedicineName());
+			handler = handler.getNextHandler();
 		}
 		return allowed;
 	}
-	
-	
-	 public PatientGroupMap getPatientGroups(){
+
+	public PatientGroupMap getPatientGroups() {
 		return patientGroupMap;
 	}
 
@@ -41,9 +39,8 @@ public class Quarantine {
 		return result[0].trim();
 	}
 
-	
 	public void wait40Days() {
-		treatmentHandler.treat(this,new DefaultTreatment());
+		treatmentHandler.treat(this, new DefaultTreatment());
 	}
 
 	public void aspirin() {
@@ -52,7 +49,7 @@ public class Quarantine {
 
 	public void antibiotic() {
 		treatmentHandler.setNextHandler(new TreatmentAntibiotic(Medicine.ANTIBIOTIC));
-		
+
 	}
 
 	public void insulin() {

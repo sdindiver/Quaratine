@@ -2,12 +2,12 @@ package com.quarantine.core;
 
 import java.util.TreeMap;
 
-public class PatientGroupMap extends TreeMap<HealthStatus, Patients>{
-	
+public class PatientGroupMap extends TreeMap<HealthStatus, Patients> {
+
 	private static final long serialVersionUID = 1L;
-	private  Patients patientCount;
-	private  HealthStatus healthStatus;
-	//private final List<Medicine> appliedTreatment = new ArrayList<>();
+	private Patients patientCount;
+	private HealthStatus healthStatus;
+	// private final List<Medicine> appliedTreatment = new ArrayList<>();
 
 	public PatientGroupMap() {
 		this.putIfAbsent(HealthStatus.DEAD, new Patients(0));
@@ -20,7 +20,7 @@ public class PatientGroupMap extends TreeMap<HealthStatus, Patients>{
 	public Patients put(HealthStatus key, Patients value) {
 		return super.put(key, value);
 	}
-	
+
 	Patients get(HealthStatus key) {
 		return super.get(key);
 	}
@@ -28,7 +28,6 @@ public class PatientGroupMap extends TreeMap<HealthStatus, Patients>{
 	public Patients getPatientCount() {
 		return patientCount;
 	}
-
 
 	HealthStatus getHealthStatus() {
 		return healthStatus;
@@ -44,7 +43,4 @@ public class PatientGroupMap extends TreeMap<HealthStatus, Patients>{
 //		this.appliedTreatment.add(medicine);
 //	}
 
-
-
-	
 }
